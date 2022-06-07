@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Umamimolecule.ConditionParser;
 
-public class ConditionEvaluator
+internal class ConditionEvaluator
 {
     public static ConditionEvaluator Instance = new ConditionEvaluator();
 

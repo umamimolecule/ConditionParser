@@ -1,6 +1,6 @@
 ﻿namespace Umamimolecule.ConditionParser;
 
-public enum Operator
+internal enum Operator
 {
     Contains,
     DoesNotContain,

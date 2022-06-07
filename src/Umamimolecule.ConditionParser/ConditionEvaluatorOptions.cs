@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Umamimolecule.ConditionParser;
 
-public class ConditionEvaluatorOptions
+internal class ConditionEvaluatorOptions
 {
     public static ConditionEvaluatorOptions Default = new ConditionEvaluatorOptions()
     {

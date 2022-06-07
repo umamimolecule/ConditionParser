@@ -1,6 +1,20 @@
 @namespace Umamimolecule.ConditionParser
 @classname ConditionParser
 @using System.Globalization
+@members
+{
+    private readonly ConditionEvaluator conditionEvaluator;
+    
+    public ConditionParser()
+        : this(null)
+    {
+    }
+     
+    public ConditionParser(ConditionEvaluatorOptions options)
+    {
+        this.conditionEvaluator = new ConditionEvaluator(options ?? ConditionEvaluatorOptions.Default);
+    }
+}
 
 start <bool>
     = "(" value:value ")" { (bool)value }
@@ -76,4 +90,4 @@ operator
     / "StartsWith"
     
 expr <object>
-    = left:primitive _ op:operator _ right:primitive { ConditionEvaluator.Instance.Evaluate(Enum.Parse<Operator>(op), left, right) }
+    = left:primitive _ op:operator _ right:primitive { this.conditionEvaluator.Evaluate(Enum.Parse<Operator>(op), left, right) }

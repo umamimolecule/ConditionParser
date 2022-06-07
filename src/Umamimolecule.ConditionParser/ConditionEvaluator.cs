@@ -7,8 +7,6 @@ namespace Umamimolecule.ConditionParser;
 
 internal class ConditionEvaluator
 {
-    public static ConditionEvaluator Instance = new ConditionEvaluator();
-
     private readonly ConditionEvaluatorOptions options;
 
     public ConditionEvaluator(ConditionEvaluatorOptions options = null)

@@ -7,7 +7,7 @@ namespace Umamimolecule.ConditionParser.Tests;
 
 public class ConditionEvaluatorTests
 {
-    private readonly ConditionEvaluator instance = ConditionEvaluator.Instance;
+    private readonly ConditionEvaluator instance = new ConditionEvaluator();
     
     [Theory]
     [InlineData("abc", "b", true)]

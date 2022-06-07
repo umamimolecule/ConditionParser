@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>ConditionParser</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Pegasus" Version="4.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PegGrammar Include="ConditionParser.peg" />
+  </ItemGroup>
+</Project>

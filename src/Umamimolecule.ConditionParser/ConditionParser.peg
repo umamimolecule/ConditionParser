@@ -1,0 +1,79 @@
+@namespace Umamimolecule.ConditionParser
+@classname ConditionParser
+@using System.Globalization
+
+start <bool>
+    = "(" value:value ")" { (bool)value }
+    / value:value { (bool)value }
+ 
+value <object>
+    = "(" value:value ")" { value }
+    / expr
+    / and
+    / or
+    / boolean
+
+and <object>
+    = left:boolean _ "and" _ right:value { (bool)left && (bool)right }
+
+or <object>
+    = left:boolean _ "or" _ right:value { (bool)left || (bool)right }
+
+primitive <object>
+    = null
+    / boolean
+    / date
+    / datetime
+    / string
+    / double
+    / integer
+
+boolean <object>
+    = "true" { true }
+    / "false" { false }
+
+double <object>
+    = value:("-"? [0-9]+ "." [0-9]+) { double.Parse(value, CultureInfo.InvariantCulture) }
+
+integer <object>
+    = value:("-"? [0-9]+) { int.Parse(value, CultureInfo.InvariantCulture) }
+
+date <object>
+    = "date\"" value:(!"\"" .)* "\"" { DateOnly.Parse(string.Concat(value)) }
+
+datetime <object>
+    = "datetime\"" value:(!"\"" .)* "\"" { DateTime.Parse(string.Concat(value), styles: DateTimeStyles.AdjustToUniversal) }
+
+string <object>
+    = "\"" value:(!"\"" .)* "\"" { string.Concat(value) }
+
+null <object> = "null" { null }
+
+_ = [ \t\r\n]*
+
+operator
+    = "Contains"
+    / "DoesNotContain"
+    / "DoesNotEndWith"
+    / "DoesNotEqual"
+    / "DoesNotMatchRegex"
+    / "DoesNotStartWith"
+    / "EndsWith"
+    / "Equals"
+    / "GreaterThan"
+    / "GreaterThanOrEqual"
+    / "IsNull"
+    / "IsNotNull"
+    / "IsEmpty"
+    / "IsNotEmpty"
+    / "IsNullOrWhitespace"
+    / "IsNotNullOrWhitespace"
+    / "IsFalse"
+    / "IsTrue"
+    / "LessThan"
+    / "LessThanOrEqual"
+    / "MatchesRegex"
+    / "StartsWith"
+    
+expr <object>
+    = left:primitive _ op:operator _ right:primitive { ConditionEvaluator.Instance.Evaluate(Enum.Parse<Operator>(op), left, right) }

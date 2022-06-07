@@ -68,23 +68,23 @@ internal class ConditionEvaluator
         return value;
     }
 
-    private static void CheckType(Operator cond, object value)
+    private static void CheckType(Operator op, object value)
     {
         if (value != null)
         {
-            var types = applicableTypes[cond];
+            var types = applicableTypes[op];
             if (!types.Contains(value.GetType()))
             {
                 throw new InvalidOperationException(
-                    $"Object of type {value.GetType()} cannot be used with operator {cond}");
+                    $"Object of type {value.GetType()} cannot be used with operator {op}");
             }
         }
     }
 
-    private static (object l, object r) CheckTypeAndConvertValue(Operator cond, object left, object right)
+    private static (object l, object r) CheckTypeAndConvertValue(Operator op, object left, object right)
     {
-        CheckType(cond, left);
-        CheckType(cond, right);
+        CheckType(op, left);
+        CheckType(op, right);
 
         var l = ConvertValue(left);
         var r = ConvertValue(right);

@@ -1,7 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>ConditionParser</RootNamespace>
+    <RootNamespace>Umamimolecule</RootNamespace>
+    <Authors>Umamimolecule</Authors>
+    <Company />
+    <Description>A rules engine to evaluate multiple combinations of conditions.</Description>
+    <PackageProjectUrl>https://github.com/umamimolecule/ConditionParser</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/umamimolecule/ConditionParser</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Condition Parser Expression Evaluator Rules Engine</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageReleaseNotes>https://github.com/umamimolecule/ConditionParser/blob/main/CHANGELOG.md#0.1.0</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>    
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Pegasus" Version="4.1.0" />

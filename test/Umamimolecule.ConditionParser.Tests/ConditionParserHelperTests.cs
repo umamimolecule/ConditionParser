@@ -3,11 +3,27 @@ using System.Globalization;
 using Shouldly;
 using Xunit;
 
-namespace Umamimolecule.ConditionParser.Tests;
+namespace Umamimolecule.ConditionParserHelperTests;
 
-public class ConditionEvaluatorTests
+public class ConditionParserHelperTests
 {
-    private readonly ConditionEvaluator instance = new ConditionEvaluator();
+    private readonly ConditionParserHelper instance = new ConditionParserHelper();
+    
+    [Theory]
+    [InlineData(Operator.DoesNotEqual, "DoesNotEqual", "DOESNOTEQUAL", "ne", "NE", "!=")]
+    [InlineData(Operator.Equals, "Equals", "eq", "==")]
+    [InlineData(Operator.GreaterThan, "GreaterThan", "gt", ">")]
+    [InlineData(Operator.GreaterThanOrEqual, "GreaterThanOrEqual", "ge", ">=")]
+    [InlineData(Operator.LessThan, "LessThan", "lt", "<")]
+    [InlineData(Operator.LessThanOrEqual, "LessThanOrEqual", "le", "<=")]
+    internal void ParseOperator(Operator expected, params string[] values)
+    {
+        foreach (var value in values)
+        {
+            var result = this.instance.ParseOperator(value);
+            result.ShouldBe(expected);
+        }
+    }
     
     [Theory]
     [InlineData("abc", "b", true)]
@@ -363,7 +379,7 @@ public class ConditionEvaluatorTests
     [InlineData(-1.1, false)]
     public void Evaluate_IsNull(object value, bool expected)
     {
-        var result = this.instance.Evaluate(Operator.IsNull, value, null);
+        var result = this.instance.Evaluate(Operator.IsNull, value);
         result.ShouldBe(expected);
     }
     
@@ -381,7 +397,7 @@ public class ConditionEvaluatorTests
     [InlineData(-1.1, true)]
     public void Evaluate_IsNotNull(object value, bool expected)
     {
-        var result = this.instance.Evaluate(Operator.IsNotNull, value, null);
+        var result = this.instance.Evaluate(Operator.IsNotNull, value);
         result.ShouldBe(expected);
     } 
     
@@ -392,7 +408,7 @@ public class ConditionEvaluatorTests
     [InlineData("a", false)]
     public void Evaluate_IsEmpty(object value, bool expected)
     {
-        var result = this.instance.Evaluate(Operator.IsEmpty, value, null);
+        var result = this.instance.Evaluate(Operator.IsEmpty, value);
         result.ShouldBe(expected);
     }
     
@@ -401,7 +417,7 @@ public class ConditionEvaluatorTests
     [InlineData(true, false)]
     public void Evaluate_IsFalse(object value, bool expected)
     {
-        var result = this.instance.Evaluate(Operator.IsFalse, value, null);
+        var result = this.instance.Evaluate(Operator.IsFalse, value);
         result.ShouldBe(expected);
     }
     
@@ -412,7 +428,7 @@ public class ConditionEvaluatorTests
     [InlineData("a", true)]
     public void Evaluate_IsNotEmpty(object value, bool expected)
     {
-        var result = this.instance.Evaluate(Operator.IsNotEmpty, value, null);
+        var result = this.instance.Evaluate(Operator.IsNotEmpty, value);
         result.ShouldBe(expected);
     } 
     
@@ -423,7 +439,7 @@ public class ConditionEvaluatorTests
     [InlineData(" ", false)]
     public void Evaluate_IsNotNullOrWhitespace(object value, bool expected)
     {
-        var result = this.instance.Evaluate(Operator.IsNotNullOrWhitespace, value, null);
+        var result = this.instance.Evaluate(Operator.IsNotNullOrWhitespace, value);
         result.ShouldBe(expected);
     }
     
@@ -434,7 +450,7 @@ public class ConditionEvaluatorTests
     [InlineData(" ", true)]
     public void Evaluate_IsNullOrWhitespace(object value, bool expected)
     {
-        var result = this.instance.Evaluate(Operator.IsNullOrWhitespace, value, null);
+        var result = this.instance.Evaluate(Operator.IsNullOrWhitespace, value);
         result.ShouldBe(expected);
     }
     
@@ -443,7 +459,7 @@ public class ConditionEvaluatorTests
     [InlineData(true, true)]
     public void Evaluate_IsTrue(object value, bool expected)
     {
-        var result = this.instance.Evaluate(Operator.IsTrue, value, null);
+        var result = this.instance.Evaluate(Operator.IsTrue, value);
         result.ShouldBe(expected);
     }
     

@@ -1,39 +1,39 @@
-@namespace Umamimolecule.ConditionParser
+@namespace Umamimolecule
 @classname ConditionParser
+@ignorecase true
 @using System.Globalization
 @members
 {
-    private readonly ConditionEvaluator conditionEvaluator;
+    private readonly ConditionParserHelper helper;
     
     public ConditionParser()
         : this(null)
     {
     }
      
-    public ConditionParser(ConditionEvaluatorOptions options)
+    public ConditionParser(ConditionParserOptions options)
     {
-        this.conditionEvaluator = new ConditionEvaluator(options ?? ConditionEvaluatorOptions.Default);
+        this.helper = new ConditionParserHelper(options ?? ConditionParserOptions.Default);
     }
 }
 
 start <bool>
-    = "(" value:value ")" { (bool)value }
-    / value:value { (bool)value }
- 
-value <object>
-    = "(" value:value ")" { value }
-    / expr
+    = _ value:or _ { (bool)value }
+
+or <object> -memoize
+    = left:or _ "or" _ right:and { (bool)left || (bool)right }
     / and
-    / or
-    / boolean
 
-and <object>
-    = left:boolean _ "and" _ right:value { (bool)left && (bool)right }
+and <object> -memoize
+    = left:and _ "and" _ right:expr { (bool)left && (bool)right }
+    / expr
+    
+expr <object> -memoize
+    = left:expr _ op:operator _ right:primary { this.helper.Evaluate(this.helper.ParseOperator(op), left, right) }
+    / left:expr _ op:operator { this.helper.Evaluate(this.helper.ParseOperator(op), left) }
+    / primary
 
-or <object>
-    = left:boolean _ "or" _ right:value { (bool)left || (bool)right }
-
-primitive <object>
+primary <object>
     = null
     / boolean
     / date
@@ -41,6 +41,7 @@ primitive <object>
     / string
     / double
     / integer
+    / "(" _ or:or _ ")" { or }
 
 boolean <object>
     = "true" { true }
@@ -69,13 +70,15 @@ operator
     = "Contains"
     / "DoesNotContain"
     / "DoesNotEndWith"
-    / "DoesNotEqual"
+    / "DoesNotEqual" / "!="
     / "DoesNotMatchRegex"
     / "DoesNotStartWith"
     / "EndsWith"
-    / "Equals"
-    / "GreaterThan"
-    / "GreaterThanOrEqual"
+    / "Equals" / "=="
+    / "eq"
+    / "GreaterThanOrEqual" / "ge" / ">="
+    / "GreaterThan" / ">"
+    / "gt"
     / "IsNull"
     / "IsNotNull"
     / "IsEmpty"
@@ -84,10 +87,10 @@ operator
     / "IsNotNullOrWhitespace"
     / "IsFalse"
     / "IsTrue"
-    / "LessThan"
-    / "LessThanOrEqual"
+    / "LessThanOrEqual" / "<="
+    / "LessThan" / "lt" / "<"
+    / "le"
     / "MatchesRegex"
+    / "ne"
     / "StartsWith"
     
-expr <object>
-    = left:primitive _ op:operator _ right:primitive { this.conditionEvaluator.Evaluate(Enum.Parse<Operator>(op), left, right) }

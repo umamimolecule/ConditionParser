@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata minClientVersion="2.5">
+    <id>Umamimolecule.ConditionParser</id>
+    <version>0.1.0</version>
+    <title>Umamimolecule.ConditionParser</title>
+    <authors>Umamimolecule</authors>
+    <owners>Umamimolecule</owners>
+    <projectUrl>https://github.com/umamimolecule/ConditionParser</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A rules engine to evaluate multiple combinations of conditions.</description>
+    <releaseNotes>https://github.com/umamimolecule/ConditionParser/blob/main/CHANGELOG.md#0.1.0</releaseNotes>
+    <tags>Condition Parser Expression Evaluator Rules Engine</tags>
+    <dependencies>
+      <dependency id="Pegasus" version="4.1.0" />
+    </dependencies>
+  </metadata>
+</package>

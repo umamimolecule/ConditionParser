@@ -1,7 +1,7 @@
 using Shouldly;
 using Xunit;
 
-namespace Umamimolecule.ConditionParser.Tests;
+namespace Umamimolecule.ConditionParserTests;
 
 public class ConditionParserTests
 {
@@ -53,12 +53,12 @@ public class ConditionParserTests
     [InlineData("(true Equals true)", true)]
     [InlineData("false Equals null", false)]
     [InlineData("null Equals true", false)]
-    // [InlineData("(true Equals (true))", true)]
-    // [InlineData("(true Equals ((true)))", true)]
-    // [InlineData("((true) Equals true)", true)]
-    // [InlineData("(((true)) Equals true)", true)]
-    // [InlineData("((true) Equals (true))", true)]
-    // [InlineData("(((true)) Equals ((true)))", true)]
+    [InlineData("(true Equals (true))", true)]
+    [InlineData("(true Equals ((true)))", true)]
+    [InlineData("((true) Equals true)", true)]
+    [InlineData("(((true)) Equals true)", true)]
+    [InlineData("((true) Equals (true))", true)]
+    [InlineData("(((true)) Equals ((true)))", true)]
     public void Equals_Boolean(string input, bool expected)
     {
         var result = this.parser.Parse(input);
@@ -67,6 +67,8 @@ public class ConditionParserTests
     
     [Theory]
     [InlineData("0.0 Equals 0.0", true)]
+    [InlineData("0.0 eq 0.0", true)]
+    [InlineData("0.0 == 0.0", true)]
     [InlineData("1.0 Equals 1.1", false)]
     [InlineData("-1.2 Equals -1.2", true)]
     [InlineData("-1.2 Equals 1.2", false)]
@@ -138,7 +140,11 @@ public class ConditionParserTests
     
     [Theory]
     [InlineData("true DoesNotEqual true", false)]
+    [InlineData("true ne true", false)]
+    [InlineData("true != true", false)]
     [InlineData("true DoesNotEqual false", true)]
+    [InlineData("true ne false", true)]
+    [InlineData("true != false", true)]
     [InlineData("false DoesNotEqual true", true)]
     [InlineData("false DoesNotEqual false", false)]
     [InlineData("(true DoesNotEqual true)", false)]
@@ -216,6 +222,46 @@ public class ConditionParserTests
     [Theory]
     [InlineData("null DoesNotEqual null", false)]
     public void DoesNotEqual_Null(string input, bool expected)
+    {
+        var result = this.parser.Parse(input);
+        result.ShouldBe(expected);
+    }
+
+    [Theory]
+    [InlineData("(100.1) GreaterThan 10.5", true)]
+    [InlineData("(100.1) GreaterThan (10.5)", true)]
+    [InlineData("(100.1 LessThanOrEqual 100)", false)]
+    [InlineData("(100.1 GreaterThan 10.5) and (100.1 LessThanOrEqual 100)", false)]
+    [InlineData("(100.1 GreaterThan 10.5 and 100.1 LessThanOrEqual 200)", true)]
+    [InlineData("(100.1 GreaterThan 10.5 and 100.1 LessThanOrEqual 200) and (100 IsNull)", false)]
+    public void CompoundExpressions(string input, bool expected)
+    {
+        var result = this.parser.Parse(input);
+        result.ShouldBe(expected);
+    }
+    
+    [Theory]
+    [InlineData("100.1 DoesNotEqual 210.5", true)]
+    [InlineData("100.1 DOESNOTEQUAL 210.5", true)]
+    [InlineData("100.1 ne 210.5", true)]
+    [InlineData("100.1 NE 210.5", true)]
+    [InlineData("100.1 != 210.5", true)]
+    [InlineData("100.1 Equals 100.1", true)]
+    [InlineData("100.1 eq 100.1", true)]
+    [InlineData("100.1 == 100.1", true)]
+    [InlineData("100.1 LessThan 210.5", true)]
+    [InlineData("100.1 lt 210.5", true)]
+    [InlineData("100.1 < 210.5", true)]
+    [InlineData("100.1 LessThanOrEqual 210.5", true)]
+    [InlineData("100.1 le 210.5", true)]
+    [InlineData("100.1 <= 210.5", true)]
+    [InlineData("100.1 GreaterThan 10.5", true)]
+    [InlineData("100.1 gt 10.5", true)]
+    [InlineData("100.1 > 10.5", true)]
+    [InlineData("100.1 GreaterThanOrEqual 10.5", true)]
+    [InlineData("100.1 ge 10.5", true)]
+    [InlineData("100.1 >= 10.5", true)]
+    public void OperatorAliases(string input, bool expected)
     {
         var result = this.parser.Parse(input);
         result.ShouldBe(expected);

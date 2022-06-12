@@ -98,6 +98,14 @@ The following operators are available:
 
 ## Data types
 
+The following data types are supported:
+- [Null](#null)
+- [Boolean](#boolean)
+- [Date and date-time](#date-and-date-time)
+- [Integer](#integer)
+- [Double](#double)
+- [Strings](#string)
+
 ### Null
 
 Null values are represented by the keyword `null`.
@@ -157,7 +165,7 @@ new ConditionParser().Parse("1.23 > 1");        // true
 new ConditionParser().Parse("1.0 == 1");        // true
 ```
 
-### Strings
+### String
 
 String values in an expression can be surrounded by either single or double quotes.  If the string value contains quotes they need to be escaped as follows:
 

@@ -105,6 +105,7 @@ Null values are represented by the keyword `null`.
 Examples:
 ```
 new ConditionParser().Parse("null == null");    // true
+new ConditionParser().Parse("null IsNull");     // true
 new ConditionParser().Parse("'abc' == null");   // false
 ```
 
@@ -115,7 +116,7 @@ Represented by the keywords `true` and `false`.
 Examples:
 ```
 new ConditionParser().Parse("true != false");   // true
-new ConditionParser().Parse("true IsFalse");    // true
+new ConditionParser().Parse("true IsFalse");    // false
 ```
 
 ### Date and date-time

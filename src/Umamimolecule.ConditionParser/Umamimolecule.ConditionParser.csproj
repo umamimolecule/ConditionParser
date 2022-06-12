@@ -6,7 +6,7 @@
     <Company />
     <Description>A rules engine to evaluate multiple combinations of conditions.</Description>
     <PackageProjectUrl>https://github.com/umamimolecule/ConditionParser</PackageProjectUrl>
-    <PackageReadmeFile>..\README.md</PackageReadmeFile>
+    <PackageReadmeFile>..\..\README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/umamimolecule/ConditionParser</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Condition Parser Expression Evaluator Rules Engine</PackageTags>

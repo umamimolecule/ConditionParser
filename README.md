@@ -176,7 +176,7 @@ String values in an expression can be surrounded by either single or double quot
 
 ## Order of precedence
 
-Like many other languages like C#, C and Java, `and` operators are evaluated before `or`.
+Like many other languages such as C#, C and Java, `and` operators are evaluated before `or`.
 
 | Expression   | Is the same as   |
 |--------------|------------------|

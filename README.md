@@ -69,28 +69,28 @@ The following operators are available:
 
 | Operator                | Aliases        | Description                                                            | Examples                                                                  |
 |-------------------------|----------------|------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| `Contains`              |                | Checks whether a string contains a substring                           | `"Been" Contains "bee"`                                                   |
-| `DoesNotContain`        |                | Checks whether a string does not contain a substring                   | `"Been" DoesNotContain "fee"`                                             |
-| `DoesNotEndWith`        |                | Checks whether a string does not end with a string                     | `"Been" DoesNotEndWith "bee"`                                             |
-| `DoesNotEqual`          | `!=`<br />`ne` | Checks whether a string does not equal another string                  | `"Been" != "bee"`<br />`"Been" ne "bee"`<br />`"Been" DoesNotEqual "bee"` |
-| `DoesNotMatchRegex`     |                | Checks whether a string does not match a regex pattern                 | `"Been" DoesNotMatchRegex "^f.*"`                                         |
-| `DoesNotStartWith`      |                | Checks whether a string does not start with a string                   | `"Been" DoesNotStartWith "Fee"`                                           |
-| `EndsWith`              |                | Checks whether a string ends with a string                             | `"Been" EndWith "en"`                                                     |
-| `Equals`                | `==`<br />`eq` | Checks whether a value equals another                                  | `"Been" == "been"`<br />`"Been" eq "been"`<br />`"Been" Equals "been"`    |
-| `GreaterThan`           | `>`<br />`gt`  | Checks whether a value is greater than another<sup>1</sup>             | `"Been" Contains "bee"`                                                   |
-| `GreaterThanOrEqual`    | `>=`<br />`ge` | Checks whether a value is greater than or equal to another<sup>1</sup> | `"Been" == "been"`<br />`"Been" eq "been"`<br />`"Been" Equals "been"`                                                                          |
-| `IsNull`                |                | Checks whether a value is null                                         |                                                                           |
-| `IsNotNull`             |                | Checks whether a value is not null                                     |                                                                           |
-| `IsEmpty`               |                | Checks whether a string is empty                                       |                                                                           |
-| `IsFalse`               |                | Checks whether a boolean value is false<sup>2</sup>                    |                                                                           |
-| `IsNotEmpty`            |                | Checks whether a string is not empty                                   |                                                                           |
-| `IsNotNullOrWhitespace` |                | Checks whether a string is not null or whitespace                      |                                                                           |
-| `IsNullOrWhitespace`    |                | Checks whether a string is null or whitespace                          |                                                                           |
-| `IsTrue`                |                | Checks whether a boolean value is true<sup>2</sup>                     |                                                                           |
-| `LessThan`              | `<`<br />`lt`  | Checks whether a value is less than another<sup>1</sup>                |                                                                           |
-| `LessThanOrEqual`       | `<=`<br />`le` | Checks whether a value is less than or equal to another<sup>1</sup>    |                                                                           |
-| `MatchesRegex`          |                | Checks whether a string matches a regex pattern                        |                                                                           |
-| `StartsWith`            |                | Checks whether a string starts with a string                           |                                                                           |
+| `Contains`              |                | Checks whether a string contains a substring                           | `'Been' Contains 'bee'`                                                   |
+| `DoesNotContain`        |                | Checks whether a string does not contain a substring                   | `'Been' DoesNotContain 'fee'`                                             |
+| `DoesNotEndWith`        |                | Checks whether a string does not end with a string                     | `'Been' DoesNotEndWith 'ien'`                                             |
+| `DoesNotEqual`          | `!=`<br />`ne` | Checks whether a string does not equal another string                  | `'Been' != "bee"`<br />`'Been' ne 'bee'`<br />`'Been' DoesNotEqual 'bee'` |
+| `DoesNotMatchRegex`     |                | Checks whether a string does not match a regex pattern                 | `'Been' DoesNotMatchRegex '^Bo*n'`                                        |
+| `DoesNotStartWith`      |                | Checks whether a string does not start with a string                   | `'Been' DoesNotStartWith 'Fee'`                                           |
+| `EndsWith`              |                | Checks whether a string ends with a string                             | `'Been' EndsWith 'en'`                                                    |
+| `Equals`                | `==`<br />`eq` | Checks whether a value equals another                                  | `'Been' == 'been'`<br />`'Been" eq 'been'`<br />`'Been' Equals 'been'`    |
+| `GreaterThan`           | `>`<br />`gt`  | Checks whether a value is greater than another<sup>1</sup>             | `123.45 > 200`<br />`123.45 gt 200`<br />`123.45 GreaterThan`             |
+| `GreaterThanOrEqual`    | `>=`<br />`ge` | Checks whether a value is greater than or equal to another<sup>1</sup> | `123.45 >= 200`<br />`123.45 ge 200`<br />`123.45 GreaterThanOrEqualTo`   |
+| `IsNull`                |                | Checks whether a value is null                                         | `'Been' IsNull`                                                           |
+| `IsNotNull`             |                | Checks whether a value is not null                                     | `'Been' IsNotNull`                                                        |
+| `IsEmpty`               |                | Checks whether a string is empty                                       | `'Been' IsEmpty`                                                          |
+| `IsFalse`               |                | Checks whether a boolean value is false<sup>2</sup>                    | `false IsFalse`                                                           |
+| `IsNotEmpty`            |                | Checks whether a string is not empty                                   | `'Been' IsNotEmpty`                                                       |
+| `IsNotNullOrWhitespace` |                | Checks whether a string is not null or whitespace                      | `'Been' IsNotNullOrWhitespace`                                            |
+| `IsNullOrWhitespace`    |                | Checks whether a string is null or whitespace                          | `'Been' IsNullOrWhitespace`                                               |
+| `IsTrue`                |                | Checks whether a boolean value is true<sup>2</sup>                     | `true IsTrue`                                                             |
+| `LessThan`              | `<`<br />`lt`  | Checks whether a value is less than another<sup>1</sup>                | `123.45 < 200`<br />`123.45 lt 200`<br />`123.45 LessThan 200`            |
+| `LessThanOrEqual`       | `<=`<br />`le` | Checks whether a value is less than or equal to another<sup>1</sup>    | `123.45 <= 200`<br />`123.45 le 200`<br />`123.45 LessThanOrEqualTo 200`  |
+| `MatchesRegex`          |                | Checks whether a string matches a regex pattern                        | `'Been' MatchesRegex '^B.*n'`                                             |
+| `StartsWith`            |                | Checks whether a string starts with a string                           | `'Been' StartsWith 'Be'`                                                  |
 
 <sup>1.</sup>Applies to all data types except for boolean.
 

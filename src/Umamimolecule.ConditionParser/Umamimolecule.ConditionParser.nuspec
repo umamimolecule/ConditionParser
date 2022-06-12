@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/umamimolecule/ConditionParser</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A rules engine to evaluate multiple combinations of conditions.</description>
-    <readme>..\..\README.md</readme>
+    <readme>..\..\..\README.md</readme>
     <releaseNotes>https://github.com/umamimolecule/ConditionParser/blob/main/CHANGELOG.md#0.1.1</releaseNotes>
     <tags>Condition Parser Expression Evaluator Rules Engine</tags>
     <dependencies>

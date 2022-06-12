@@ -3,8 +3,8 @@
 A rules engine to evaluate multiple combinations of conditions.
 
 <p align="center">
-![GitHub-Mark-Light](https://raw.githubusercontent.com/umamimolecule/main/.assets/logo-light.png#gh-light-mode-only)
-![GitHub-Mark-Dark](https://raw.githubusercontent.com/umamimolecule/main/.assets/logo-darh.png#gh-dark-mode-only)
+<img src="https://raw.githubusercontent.com/umamimolecule/main/.assets/logo-light.png#gh-light-mode-only" />
+<img src="https://raw.githubusercontent.com/umamimolecule/main/.assets/logo-dark.png#gh-dark-mode-only" />
 </p>
 
 ```c#

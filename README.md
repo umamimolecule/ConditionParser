@@ -148,7 +148,7 @@ Examples:
 ```c#
 new ConditionParser().Parse("1 > 0");       // true
 new ConditionParser().Parse("-1 < 0");      // true
-new ConditionParser().Parse("1234 == 1");    // false
+new ConditionParser().Parse("1234 == 1");   // false
 ```
 
 ### Double

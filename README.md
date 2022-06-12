@@ -104,7 +104,7 @@ The following data types are supported:
 - [Date and date-time](#date-and-date-time)
 - [Integer](#integer)
 - [Double](#double)
-- [Strings](#string)
+- [String](#string)
 
 ### Null
 

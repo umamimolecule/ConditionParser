@@ -9,7 +9,7 @@ A rules engine to evaluate multiple combinations of conditions.
 
 ```c#
 new ConditionParser().Parse("'Quick brown fox' Contains 'fox'");    // true
-new ConditionParser().Parse("123.456 > 200");                       // false
+new ConditionParser().Parse("123.456 > 200 and 123.456 <= 300");    // false
 new ConditionParser().Parse("'Hot coffee' MatchesRegex '^Hot'");    // true
 ```
 
@@ -177,3 +177,7 @@ Like many other languages like C#, C and Java, `and` operators are evaluated bef
 | `A and B or C` | `(A and B) or C` |
 
 Expressions can be surrounded by parentheses to control order of evaluation.
+
+```c#
+new ConditionParser().Parse("('ABC' Contains 'B' or 'ABC' Contains 'C') and (202 >= 200 and 202 < 400)");    // true
+```

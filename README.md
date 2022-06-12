@@ -8,13 +8,13 @@ new ConditionParser().Parse("123.456 > 200");                       // false
 new ConditionParser().Parse("'Hot coffee' MatchesRegex '^Hot'");    // true
 ```
 
-# Installation
+## Installation
 
 Install the [ConditionParser NuGet package](http://nuget.org/packages/Umamimolecule.ConditionParser) in Visual Studio.
 
     PM> Install-Package Umamimolecule.ConditionParser
 
-# Quick start
+## Quick start
 
 ```c#
 using System;
@@ -37,7 +37,7 @@ namespace ConditionParserExample
 }
 ```
 
-# Options
+## Options
 
 The parser behaviour can be controlled by passing in options in the constructor.
 
@@ -58,7 +58,7 @@ var parser = new ConditionParser(
     });
 ```
 
-# Operators
+## Operators
 
 The following operators are available:
 
@@ -90,9 +90,9 @@ The following operators are available:
 <sup>1.</sup>Applies to all data types except for boolean.
 <sup>2.</sup>Applies to boolean types only.
 
-# Data types
+## Data types
 
-## Null
+### Null
 
 Null values are represented by the keyword `null`.
 
@@ -102,7 +102,7 @@ new ConditionParser().Parse("null == null");    // true
 new ConditionParser().Parse("'abc' == null");   // false
 ```
 
-## Boolean
+### Boolean
 
 Represented by the keywords `true` and `false`.
 
@@ -112,7 +112,7 @@ new ConditionParser().Parse("true != false");   // true
 new ConditionParser().Parse("true IsFalse");    // true
 ```
 
-## Date and date-time
+### Date and date-time
 
 Date and date-time values are represented by a quoted date value, prefixed with either `date` or `datetime`.  Single or double-quotes can be used.
 
@@ -127,7 +127,7 @@ new ConditionParser().Parse("date'2022-12-31' == datetime'2022-12-31T00:00:00Z'"
 
 Date and datetime values can be compared with each other.
 
-## Integer
+### Integer
 
 Integers are represented a sequence of digits, optionally with a leading `-` to indicate a negative value.
 
@@ -137,7 +137,7 @@ new ConditionParser().Parse("1 > 0");    // true
 new ConditionParser().Parse("1234 == 1); // false
 ```
 
-## Double
+### Double
 
 Doubles are represented by a number with a decimal point, optionally with a leading `-` to indicate a negative value.  Doubles and integers can be compared against each other.
 
@@ -148,7 +148,7 @@ new ConditionParser().Parse("1.23 > 1");   // true
 new ConditionParser().Parse("1.0 == 1");   // true
 ```
 
-## Strings
+### Strings
 
 String values in an expression can be surrounded by either single or double quotes.  If the string value contains quotes they need to be escaped as follows:
 
@@ -157,7 +157,7 @@ String values in an expression can be surrounded by either single or double quot
 | Single (`'`) | Single quotes within the string value need to be escaped as either `''` or `\'` | `'o''brien' EndsWith 'rien'`<br />`'o\'brien' EndsWith 'rien'`     |
 | Double (`"`) | Double quotes within the string value need to be escaped as either `""` or `\"` | `"Bob ""Animal"" Smith" IsNotNull`<br />`"Bob \"Animal\" Smith" IsNotNull` |
 
-# Order of precedence
+## Order of precedence
 
 Like many other languages like C#, C and Java, `and` operators are evaluated before `or`.
 

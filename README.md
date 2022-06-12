@@ -5,7 +5,7 @@
 
 # Condition Parser
 
-A rules engine to evaluate multiple combinations of conditions.
+A rules engine for .Net to evaluate multiple combinations of conditions.
 
 ```c#
 new ConditionParser().Parse("'Quick brown fox' Contains 'fox'");    // true

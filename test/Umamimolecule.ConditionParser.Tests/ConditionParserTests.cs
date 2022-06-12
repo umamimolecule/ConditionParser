@@ -44,6 +44,51 @@ public class ConditionParserTests
         var result = this.parser.Parse(input);
         result.ShouldBe(expected);
     }
+
+    [Theory]
+    [InlineData("false or false or false", false)]
+    [InlineData("false or false or true", true)]
+    [InlineData("false or true or false", true)]
+    [InlineData("false or true or true", true)]
+    [InlineData("true or false or false", true)]
+    [InlineData("true or false or true", true)]
+    [InlineData("true or true or false", true)]
+    [InlineData("true or true or true", true)]
+    
+    [InlineData("false and false and false", false)]
+    [InlineData("false and false and true", false)]
+    [InlineData("false and true and false", false)]
+    [InlineData("false and true and true", false)]
+    [InlineData("true and false and false", false)]
+    [InlineData("true and false and true", false)]
+    [InlineData("true and true and false", false)]
+    [InlineData("true and true and true", true)]
+    
+    [InlineData("false and false or false", (false && false) || false)]
+    [InlineData("false and false or true", (false && false) || true)]
+    [InlineData("false and true or false", (false && true) || false)]
+    [InlineData("false and true or true", (false && true) || true)]
+    [InlineData("true and false or false", (true && false) || false)]
+    [InlineData("true and false or true", (true && false) || true)]
+    [InlineData("true and true or false", (true && true) || false)]
+    [InlineData("true and true or true", (true && true) || true)]
+    
+    [InlineData("false or false and false", false || (false && false))]
+    [InlineData("false or false and true", false || (false && true))]
+    [InlineData("false or true and false", false || (true && false))]
+    [InlineData("false or true and true", false || (true && true))]
+    [InlineData("true or false and false", true || (false && false))]
+    [InlineData("true or false and true", true || (false && true))]
+    [InlineData("true or true and false", true || (true && false))]
+    [InlineData("true or true and true", true || (true && true))]
+    
+    [InlineData("(true or false) and false", (true || false) && false)]
+    [InlineData("(true or true) and false", (true || true) && false)]
+    public void OrderOfPrecedence(string input, bool expected)
+    {
+        var result = this.parser.Parse(input);
+        result.ShouldBe(expected);
+    }
     
     [Theory]
     [InlineData("true Equals true", true)]
@@ -98,6 +143,7 @@ public class ConditionParserTests
     
     [Theory]
     [InlineData("date\"2022-12-31\" Equals date\"2022-12-31\"", true)]
+    [InlineData("date'2022-12-31' Equals date'2022-12-31'", true)]
     [InlineData("date\"2022-12-31\" Equals date\"2022-12-30\"", false)]
     [InlineData("null Equals date\"2022-12-31\"", false)]
     [InlineData("date\"2022-12-31\" Equals null", false)]
@@ -109,6 +155,7 @@ public class ConditionParserTests
     
     [Theory]
     [InlineData("datetime\"2022-12-31T01:02:03Z\" Equals datetime\"2022-12-31T01:02:03Z\"", true)]
+    [InlineData("datetime'2022-12-31T01:02:03Z' Equals datetime'2022-12-31T01:02:03Z'", true)]
     [InlineData("datetime\"2022-12-31T01:02:03Z\" Equals datetime\"2022-12-30T01:02:03Z\"", false)]
     [InlineData("null Equals datetime\"2022-12-31T01:02:03Z\"", false)]
     [InlineData("datetime\"2022-12-31T01:02:03Z\" Equals null", false)]
@@ -120,6 +167,11 @@ public class ConditionParserTests
     
     [Theory]
     [InlineData("\"0\" Equals \"0\"", true)]
+    [InlineData("'0' Equals \"0\"", true)]
+    [InlineData("'o''brien' Equals 'o''brien'", true)]
+    [InlineData("'o\\'brien' Equals 'o\\'brien'", true)]
+    [InlineData("\"o'brien\" Equals 'o''brien'", true)]
+    [InlineData("\"o'brien\" Equals \"o'brien\"", true)]
     [InlineData("\"1\" Equals \"0\"", false)]
     [InlineData("\"\" Equals \"\"", true)]
     [InlineData("\"\" Equals \"1\"", false)]

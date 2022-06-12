@@ -602,7 +602,7 @@ public class ConditionParserHelperTests
     [Theory]
     [InlineData("abc", ".*", true)]
     [InlineData("abc", "abc", true)]
-    [InlineData("ABC", "abc", true)]
+    [InlineData("ABC", "^abc$", true)]
     [InlineData("abc", "d", false)]
     [InlineData("", "a", false)]
     [InlineData("abc", null, false)]

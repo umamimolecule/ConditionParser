@@ -54,17 +54,36 @@ integer <object>
     = value:("-"? [0-9]+) { int.Parse(value, CultureInfo.InvariantCulture) }
 
 date <object>
-    = "date\"" value:(!"\"" .)* "\"" { DateOnly.Parse(string.Concat(value)) }
+    = "date" singleQuote value:(!singleQuote .)* singleQuote { DateOnly.Parse(string.Concat(value)) }
+    / "date" doubleQuote value:(!doubleQuote .)* doubleQuote { DateOnly.Parse(string.Concat(value)) }
 
 datetime <object>
-    = "datetime\"" value:(!"\"" .)* "\"" { DateTime.Parse(string.Concat(value), styles: DateTimeStyles.AdjustToUniversal) }
+    = "datetime" singleQuote value:(!singleQuote .)* singleQuote { DateTime.Parse(string.Concat(value), styles: DateTimeStyles.AdjustToUniversal) }
+    / "datetime" doubleQuote value:(!doubleQuote .)* doubleQuote { DateTime.Parse(string.Concat(value), styles: DateTimeStyles.AdjustToUniversal) }
 
 string <object>
-    = "\"" value:(!"\"" .)* "\"" { string.Concat(value) }
+    = singleQuote value:(singleQuoteStringContents)* singleQuote { string.Concat(value) }
+    / doubleQuote value:(doubleQuoteStringContents)* doubleQuote { string.Concat(value) }
 
 null <object> = "null" { null }
 
 _ = [ \t\r\n]*
+
+doubleQuote = "\""
+ 
+singleQuote = "'"
+
+escapedDoubleQuote = "\"\"" / "\\\""
+
+escapedSingleQuote = "''" / "\\'"
+
+singleQuoteStringContents
+    = escapedSingleQuote { "'" }
+    / !singleQuote .
+
+doubleQuoteStringContents
+    = escapedDoubleQuote { "\"" }
+    / !doubleQuote .
 
 operator
     = "Contains"

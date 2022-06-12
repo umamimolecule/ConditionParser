@@ -2,6 +2,11 @@
 
 A rules engine to evaluate multiple combinations of conditions.
 
+<p align="center">
+![GitHub-Mark-Light](https://raw.githubusercontent.com/umamimolecule/main/.assets/logo-light.png#gh-light-mode-only)
+![GitHub-Mark-Dark](https://raw.githubusercontent.com/umamimolecule/main/.assets/logo-darh.png#gh-dark-mode-only)
+</p>
+
 ```c#
 new ConditionParser().Parse("'Quick brown fox' Contains 'fox'");    // true
 new ConditionParser().Parse("123.456 > 200");                       // false
@@ -88,6 +93,7 @@ The following operators are available:
 | `StartsWith`            |            | Checks whether a string starts with a string                           |                                                                           |
 
 <sup>1.</sup>Applies to all data types except for boolean.
+
 <sup>2.</sup>Applies to boolean types only.
 
 ## Data types
@@ -121,7 +127,7 @@ Date values are represented in UTC values at midnight.  Date and date-time value
 Examples:
 ```
 new ConditionParser().Parse("date'2022-12-31' > date'2022-12-01'"); // true
-new ConditionParser().Parse("datetime'2022-12-31T01:23:45.678Z > datetime'2022-12-31T00:00:00.000Z"); // true
+new ConditionParser().Parse("datetime'2022-12-31T01:23:45.678Z' > datetime'2022-12-31T00:00:00.000Z"); // true
 new ConditionParser().Parse("date'2022-12-31' == datetime'2022-12-31T00:00:00Z'"); // true
 ```
 
@@ -133,29 +139,33 @@ Integers are represented a sequence of digits, optionally with a leading `-` to 
 
 Examples:
 ```
-new ConditionParser().Parse("1 > 0");    // true
-new ConditionParser().Parse("1234 == 1); // false
+new ConditionParser().Parse("1 > 0");       // true
+new ConditionParser().Parse("-1 < 0");      // true
+new ConditionParser().Parse("1234 == 1);    // false
 ```
 
 ### Double
 
-Doubles are represented by a number with a decimal point, optionally with a leading `-` to indicate a negative value.  Doubles and integers can be compared against each other.
+Doubles are represented by a number with a decimal point, optionally with a leading `-` to indicate a negative value.
+
+Doubles and integers can be compared against each other.
 
 Examples:
 ```
-new ConditionParser().Parse("1.23 > 1.1"); // true
-new ConditionParser().Parse("1.23 > 1");   // true
-new ConditionParser().Parse("1.0 == 1");   // true
+new ConditionParser().Parse("1.23 > 1.1");      // true
+new ConditionParser().Parse("-1.23 < 0.0");     // true
+new ConditionParser().Parse("1.23 > 1");        // true
+new ConditionParser().Parse("1.0 == 1");        // true
 ```
 
 ### Strings
 
 String values in an expression can be surrounded by either single or double quotes.  If the string value contains quotes they need to be escaped as follows:
 
-| Quote type   | Notes                                                                           | Examples                                                             |
-|--------------|---------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| Single (`'`) | Single quotes within the string value need to be escaped as either `''` or `\'` | `'o''brien' EndsWith 'rien'`<br />`'o\'brien' EndsWith 'rien'`     |
-| Double (`"`) | Double quotes within the string value need to be escaped as either `""` or `\"` | `"Bob ""Animal"" Smith" IsNotNull`<br />`"Bob \"Animal\" Smith" IsNotNull` |
+| Quote type   | Notes                                                                                                        | Examples                                                                                                                    |
+|--------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Single (`'`) | Escape single quotes within the value as either `''` or `\'`<br />String may contain unescaped double quotes | `'o''brien' EndsWith 'rien'`<br />`'o\'brien' EndsWith 'rien'`<br />`'These "interesting" times' Contains '"int'`           |
+| Double (`"`) | Escape double quotes within the value as either `""` or `\"`<br />String may contain unescaped single quotes | `"Bob ""Animal"" Smith" IsNotNull`<br />`"Bob \"Animal\" Smith" IsNotNull`<br />`"These 'interesting' times" Contains "'int"` |
 
 ## Order of precedence
 

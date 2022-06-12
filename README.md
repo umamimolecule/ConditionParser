@@ -132,8 +132,6 @@ new ConditionParser().Parse("datetime'2022-12-31T01:23:45.678Z' > datetime'2022-
 new ConditionParser().Parse("date'2022-12-31' == datetime'2022-12-31T00:00:00Z'"); // true
 ```
 
-Date and datetime values can be compared with each other.
-
 ### Integer
 
 Integers are represented a sequence of digits, optionally with a leading `-` to indicate a negative value.
